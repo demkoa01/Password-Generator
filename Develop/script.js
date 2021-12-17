@@ -5,14 +5,22 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  var passwordLength = '';
 
   // ask the user what password criteria they have
   var confirmLength = window.confirm("Would you like your password to be LONGER than 8 characters?");
   // if yes, they do want more than 8 characters in their password
   if (confirmLength) {
     console.log("yes, more than 8 characters");
+    passwordLength = Math.floor(Math.random() * (128 - 8) + 8);
+    console.log(passwordLength);
   }
-  
+  else {
+    console.log("less than 8 characters");
+    passwordLength = Math.floor(Math.random() * 9) + 1;
+    console.log(passwordLength);
+  };
+      
   // Confim character types in the password
   var confirmCharTypesSpec = window.confirm("Do you want special characters in your password? I.e *, %, $, etc.");
   var confirmCharTypesNum = window.confirm("Do you want numbers in your password?");
@@ -32,47 +40,36 @@ function writePassword() {
     "\n 5. Lowercase letters?: " + confirmCharTypeLow);
   }
 
-  // generate the random password based on above criteria
-  generatePassword();
-  function generatePassword () {
-    // define the different characters possible
-    var passwordLength = '';
-    var specialChar = "!@#$%^&*()";
-    var numbers = "0123456789";
-    var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  // define the different characters possible
+  var specialChar = "!@#$%^&*()";
+  var numbers = "0123456789";
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  
+  // create a new variable with all possible character types, based on what was selected in ealier prompts
+  // I.E. if user wants all types, then all characters as defined above are available to be used
+  var charCodes = '';
+  if (confirmCharTypesSpec) charCodes = charCodes.concat(specialChar);
+  if (confirmCharTypesNum) charCodes = charCodes.concat(numbers);
+  if (confirmCharTypesUp) charCodes = charCodes.concat(upperCase);
+  if (confirmCharTypeLow) charCodes = charCodes.concat(lowerCase);
+  console.log(charCodes);
 
-    // generate length of password between either 1-8 characters or 8-128 characters
-    if (confirmLength) {
-      passwordLength = Math.floor(Math.random() * (128 - 8) + 8);
-      console.log(length);
+  // call password generator
+ generatePassword(passwordLength, charCodes);
+
+  // funciton for generating a random pw based on chosen criteria above
+  // needs to intake the determined password length & the determined characters 
+  function generatePassword (passwordLength, charCodes) {
+    let password = "";
+    for (let i=0; i < passwordLength; i++) {
+      password += charCodes.charAt(
+        Math.floor(Math.random() * charCodes.length)
+      );
     }
-    else {
-      passwordLength = Math.floor(Math.random() * 9) + 1;
-      console.log(length);
-    };
-
-    // create a new variable with all possible character types, based on what was selected in ealier prompts
-    // I.E. if user wants all types, then all characters as defined above are available to be used
-    var charCodes = '';
-    if (confirmCharTypesSpec) charCodes = charCodes.concat(specialChar);
-    if (confirmCharTypesNum) charCodes = charCodes.concat(numbers);
-    if (confirmCharTypesUp) charCodes = charCodes.concat(upperCase);
-    if (confirmCharTypeLow) charCodes = charCodes.concat(lowerCase);
-
-    for (var i = 0; i <= passwordLength; i++) {
-      var pwCode = charCodes[Math.floor(Math.random() * charCodes.length)];
-      password = charCodes.toString(pwCode, pwCode +1);
-    }
-
-    document.getElementById("password").value = password;
     console.log(password);
+    alert("Your password is: " + password);
   };
-
-
-
-
-  passwordText.value = password;
 
 };
 
