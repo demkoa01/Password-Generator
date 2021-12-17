@@ -7,42 +7,35 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   // ask the user what password criteria they have
-  var confirmNumberChar = window.confirm("Would you like your password to be LONGER than 8 characters?");
-  var confirmSpecialChar = window.confirm("Would you like your password to contain special characters?");
-  var confirmNumbers = window.confirm("Would you like your password to contain numbers?");
-  var promptUpperLower = window.prompt("Would you like only LOWER case letters, only UPPER case letters, or BOTH in your password? Enter LOWER, UPPER or BOTH.");
-
+  var confirmLength = window.confirm("Would you like your password to be LONGER than 8 characters?");
   // if yes, they do want more than 8 characters in their password
-  if (confirmNumberChar) {
+  if (confirmLength) {
     console.log("yes, more than 8 characters");
   }
-  // if yes, they do want special characters in their password
-  if (confirmSpecialChar) {
-    console.log("yes, special characters");
-  }
-  // if yes, they do want numbers in their password
-  if (confirmNumbers) {
-    console.log("yes, include numbers");
-  }
+  
+  // Confim character types in the password
+  var confirmCharTypesSpec = window.confirm("Do you want special characters in your password? I.e *, %, $, etc.");
+  var confirmCharTypesNum = window.confirm("Do you want numbers in your password?");
+  var confirmCharTypesUp = window.confirm("Do you want uppercase letters in your password?");
+  var confirmCharTypeLow = window.confirm("Do you want lowercasse numbers in your password?");
 
-
-  // Lowercase, uppercase or both in password
-  if (promptUpperLower === "" || promptUpperLower === null) {
-    window.alert("You need to provide a valid answer, try again!");
+  if (!confirmCharTypesSpec && !confirmCharTypesNum && !confirmCharTypesUp && !confirmCharTypeLow) {
+    window.alert("You must select at least one character type (special characters, numbers, upper or lower case)! Please try again.");
     return writePassword();
   }
-  // convert promptUpperLower input from user to all lowercase
-  promptUpperLower = promptUpperLower.toLowerCase();
-  if (promptUpperLower === "lower") {
-    console.log("only lowercase");
+  else {
+    window.alert("Your selected password criteria is: 1. More than 8 characters long? " + confirmLength + 
+    " 2. Special Characters?: " + confirmCharTypesSpec +
+    " 3. Numbers?: " + confirmCharTypesNum + 
+    " 4. Uppercase letters?: " + confirmCharTypesUp +
+    " 5. Lowercase letters?: " + confirmCharTypeLow);
   }
-  else if (promptUpperLower === "upper") {
-    console.log("only uppercase");
-  }
-  else if (promptUpperLower === "both") {
-    console.log("both upper and lower case");
-  }
- 
+
+
+
+
+
+
   passwordText.value = password;
 
 };
