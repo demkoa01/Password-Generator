@@ -3,7 +3,6 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
   var passwordLength = '';
 
@@ -58,19 +57,23 @@ function writePassword() {
   // call password generator
  generatePassword(passwordLength, charCodes);
 
-  // funciton for generating a random pw based on chosen criteria above
-  // needs to intake the determined password length & the determined characters 
-  function generatePassword (passwordLength, charCodes) {
-    let password = "";
-    for (let i=0; i < passwordLength; i++) {
-      password += charCodes.charAt(
-        Math.floor(Math.random() * charCodes.length)
-      );
-    }
-    console.log(password);
-    alert("Your password is: " + password);
-  };
 
+};
+
+// funciton for generating a random pw based on chosen criteria above
+// needs to intake the determined password length & the determined characters 
+function generatePassword (passwordLength, charCodes) {
+  let password = "";
+  for (let i=0; i < passwordLength; i++) {
+    password += charCodes.charAt(
+      Math.floor(Math.random() * charCodes.length)
+    );
+  }
+  
+  // console should display PW along with a page alert, when user hits OKAY then the PW will appear in the text box
+  console.log(password);
+  alert("Your password is: " + password);
+  document.getElementById("password").value = password;
 };
 
 // Add event listener to generate button
