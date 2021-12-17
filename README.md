@@ -13,6 +13,7 @@
 
 ### From there, a function creates and outputs a random password as an alert & in the text box of the page
 
-### URL: 
+### URL: https://demkoa01.github.io/Password-Generator/
 
-### Screenshot:
+### Screenshot: 
+
