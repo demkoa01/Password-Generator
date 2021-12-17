@@ -35,18 +35,38 @@ function writePassword() {
   // generate the random password based on above criteria
   generatePassword();
   function generatePassword () {
-    console.log("make a PW");
+    // define the different characters possible
+    var passwordLength = '';
+    var specialChar = "!@#$%^&*()";
+    var numbers = "0123456789";
+    var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var lowerCase = "abcdefghijklmnopqrstuvwxyz";
 
-    // generate length of password between 1-128 characters
+    // generate length of password between either 1-8 characters or 8-128 characters
     if (confirmLength) {
-      var length = Math.floor(Math.random() * 129);
+      passwordLength = Math.floor(Math.random() * (128 - 8) + 8);
       console.log(length);
     }
     else {
-      length = Math.floor(Math.random() * 9) + 1;
+      passwordLength = Math.floor(Math.random() * 9) + 1;
       console.log(length);
+    };
+
+    // create a new variable with all possible character types, based on what was selected in ealier prompts
+    // I.E. if user wants all types, then all characters as defined above are available to be used
+    var charCodes = '';
+    if (confirmCharTypesSpec) charCodes = charCodes.concat(specialChar);
+    if (confirmCharTypesNum) charCodes = charCodes.concat(numbers);
+    if (confirmCharTypesUp) charCodes = charCodes.concat(upperCase);
+    if (confirmCharTypeLow) charCodes = charCodes.concat(lowerCase);
+
+    for (var i = 0; i <= passwordLength; i++) {
+      var pwCode = charCodes[Math.floor(Math.random() * charCodes.length)];
+      password = charCodes.toString(pwCode, pwCode +1);
     }
 
+    document.getElementById("password").value = password;
+    console.log(password);
   };
 
 
