@@ -8,9 +8,9 @@ function writePassword() {
 
   // ask the user what password criteria they have
   var confirmLength = window.confirm("Would you like your password to be LONGER than 8 characters?");
-  // if yes, they do want more than 8 characters in their password
+  // if yes, they do want more than 8 characters in their password 
+  // console will show determined random length for PW
   if (confirmLength) {
-    console.log("yes, more than 8 characters");
     passwordLength = Math.floor(Math.random() * (128 - 8) + 8);
     console.log(passwordLength);
   }
@@ -52,12 +52,11 @@ function writePassword() {
   if (confirmCharTypesNum) charCodes = charCodes.concat(numbers);
   if (confirmCharTypesUp) charCodes = charCodes.concat(upperCase);
   if (confirmCharTypeLow) charCodes = charCodes.concat(lowerCase);
+  // console will then show available characters for the PW
   console.log(charCodes);
 
   // call password generator
  generatePassword(passwordLength, charCodes);
-
-
 };
 
 // funciton for generating a random pw based on chosen criteria above
